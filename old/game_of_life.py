@@ -1,27 +1,29 @@
 # Matrix n*n
 # Randomly filled with dots that follow 4 rules:
-    # any life cell with fewer than two neighbours dies                     life: n < 2 -> dead
-    # any life cell with two or three life neighbours lives                 life: n == 2 || n == 3 -> alive
-    # any life cell with more than three neighbours dies                    life: n > 3 -> dead
-    # any dead cell with exactly three neighbours becomes a living cell     dead: n == 3 -> alive
+# any life cell with fewer than two neighbours dies                     life: n < 2 -> dead
+# any life cell with two or three life neighbours lives                 life: n == 2 || n == 3 -> alive
+# any life cell with more than three neighbours dies                    life: n > 3 -> dead
+# any dead cell with exactly three neighbours becomes a living cell     dead: n == 3 -> alive
 # everything happens in one step
 
 import pygame
 from pygame.locals import *
-import time
+# import time
 import random
 
+FLAGS = FULLSCREEN | DOUBLEBUF
 BACKGROUND = (255, 255, 255)
 DOT_COLOR = (255, 0, 0)
-FPS = 100
+FPS = 1
 
 SCREEN_SIZE = WIDTH, HEIGHT = (600, 600)
-N = 150     # Count of cells in a row
+N = 100     # Count of cells in a row
 COUNT_WIDTH = int(WIDTH / N)
 COUNT_HEIGHT = int(HEIGHT / N)
 
 print(COUNT_HEIGHT)
 print(COUNT_WIDTH)
+
 
 class Environment:
 
@@ -81,16 +83,17 @@ class Cell:
         self.neighbours = 0
 
         if self.lives:
-            self.color = (0,0,0)
+            self.color = (0, 0, 0)
         else:
-            self.color = (255,255,255)
-        
+            self.color = (255, 255, 255)
+
         self.x = x
         self.y = y
 
     def draw(self):
-        if self.changed == True:
-            rect = pygame.Rect(self.x*COUNT_WIDTH, self.y*COUNT_HEIGHT, COUNT_WIDTH-1,COUNT_HEIGHT-1 )
+        if self.changed:
+            rect = pygame.Rect(self.x * COUNT_WIDTH, self.y *
+                               COUNT_HEIGHT, COUNT_WIDTH - 1, COUNT_HEIGHT - 1)
             pygame.draw.rect(self.screen, self.color, rect.inflate(-0.1, -0.1))
             self.changed = False
 
@@ -104,27 +107,27 @@ class Cell:
         if not self.lives:
             if neighbours == 3:
                 self.lives = True
-                self.color = (0,0,0)
+                self.color = (0, 0, 0)
                 self.changed = True
             return
 
         if neighbours < 2:
             self.lives = False
-            self.color = (255,255,255)
+            self.color = (255, 255, 255)
             self.changed = True
 
         if neighbours == 2 or neighbours == 3:
             self.lives = True
-            self.color = (0,0,0)
+            self.color = (0, 0, 0)
             self.changed = True
 
         if neighbours > 3:
             self.lives = False
-            self.color = (255,255,255)
+            self.color = (255, 255, 255)
             self.changed = True
 
 
-class Grid: 
+class Grid:
 
     def __init__(self, screen, s_width, s_height, color):
         self.screen = screen
@@ -139,7 +142,7 @@ class Grid:
         for i in range(N):
             self.grid.append([])
             for j in range(N):
-                lives_proba = random.randint(0,10)
+                lives_proba = random.randint(0, 10)
                 if lives_proba == 1:
                     self.grid[i].append(Cell(self.screen, i, j, True))
                 else:
@@ -153,29 +156,29 @@ class Grid:
     # Currently ignores boundaries
     def update(self):
         # self.newGrid = self.grid
-        for i in range(1, N-1):
-            for j in range(1, N-1):
+        for i in range(1, N - 1):
+            for j in range(1, N - 1):
                 count = self.count_neighbours(self.grid[i][j])
-                self.grid[i][j].count_neighbours = count 
+                self.grid[i][j].count_neighbours = count
 
-        for i in range(1, N-1):
-            for j in range(1, N-1):
+        for i in range(1, N - 1):
+            for j in range(1, N - 1):
                 self.grid[i][j].update()
         # self.grid = self.newGrid
 
     # Contains errors at boundaries
     def count_neighbours(self, cell):
-        
-        x = cell.x 
+
+        x = cell.x
         y = cell.y
 
         count = 0
 
-        for i in range(x-1,x+2):
-            for j in range(y-1, y+2):
+        for i in range(x - 1, x + 2):
+            for j in range(y - 1, y + 2):
                 if i == x and j == y:
                     continue
-                if self.grid[i][j].lives == True:
+                if self.grid[i][j].lives:
                     count += 1
 
         return count
@@ -183,7 +186,3 @@ class Grid:
 
 env = Environment()
 env.run_game()
-
-
-
-
