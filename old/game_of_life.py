@@ -17,7 +17,7 @@ DOT_COLOR = (255, 0, 0)
 FPS = 1
 
 SCREEN_SIZE = WIDTH, HEIGHT = (600, 600)
-N = 100     # Count of cells in a row
+N = 150     # Count of cells in a row
 COUNT_WIDTH = int(WIDTH / N)
 COUNT_HEIGHT = int(HEIGHT / N)
 
@@ -49,11 +49,12 @@ class Environment:
 
         self.grid.init_random()
 
+        self.screen.fill(BACKGROUND)
+
         while True:
 
             self.global_time += 1
 
-            self.screen.fill(BACKGROUND)
             self.handle_events_human()
 
             self.grid.update()
