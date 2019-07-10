@@ -4,7 +4,7 @@ from pygame.locals import *  # seems like this sucks
 
 import sys
 sys.path.append('./')
-from app.src.grid import Grid
+from app.src.life import Life
 from app.src.assets.configuration import *
 
 
