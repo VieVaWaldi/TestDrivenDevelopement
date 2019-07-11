@@ -15,23 +15,27 @@ class Game:
         pygame.init()
         self.screen = pygame.display.set_mode(SCREEN_SIZE)
 
-        # self.grid = Grid(self.screen)
-        # self.grid.init_grid_human()
-        # self.grid.init_grid_random()
+        self.life = Life(self.screen)
+        # self.life.init_universe_random(15)
+        self.life.init_universe_by_god()
 
         self.running = False
 
     def start_game(self):
+
         self.running = True
-        self.screen.fill(BACKGROUND)
 
         while self.running:
-            # time.sleep(1)
 
-            self.__check_events()
+            # self.__check_events()
 
-            # self.grid.update()
-            # self.grid.draw()
+            self.life.calculate_universe()
+
+            # self.life.print_universe()
+            # self.life.print_neighbours_list()
+
+            self.life.draw()
+            self.life.update_universe()
 
             pygame.display.update()
 

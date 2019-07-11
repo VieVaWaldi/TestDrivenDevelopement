@@ -8,7 +8,9 @@ from app.src.assets.configuration import *
 class Cell:
     """ A cell is the simplest living or dead object. """
 
-    def __init__(self, x, y, is_alive):
+    def __init__(self, x, y, is_alive, screen=None):
+
+        self.screen = screen
 
         if not isinstance(x, int) or not isinstance(y, int):
             raise TypeError('Coordinates must be an int.')
@@ -21,6 +23,9 @@ class Cell:
 
         self.is_alive = is_alive
         self.is_alive_changed = True
+
+        self.rect = pygame.Rect(self.x * CELLS_SIZE_WIDTH, self.y *
+            CELLS_SIZE_HEIGHT, CELLS_SIZE_WIDTH - 1, CELLS_SIZE_HEIGHT - 1)
 
         self.color = self.__apply_color()
 
@@ -47,7 +52,8 @@ class Cell:
 
 
     def draw(self):
-        pass
+        if self.is_alive_changed:
+            pygame.draw.rect(self.screen, self.color, self.rect.inflate(-0.1, -0.1))
 
     def __apply_color(self):
         return COLOR_CELL_ALIVE if self.is_alive else COLOR_CELL_DEAD
