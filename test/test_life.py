@@ -15,15 +15,15 @@ class TestLife(unittest.TestCase):
     # Init life Random ############################################################
 
     def test_init_universe_random_inits_not_empty(self):
-        self.life.init_universe_random(chance_alive=100)
+        self.life.init_universe_random()
         self.assertIsNotNone(self.life.universe)
 
     def test_init_universe_random_has_correct_num_of_rows(self):
-        self.life.init_universe_random(chance_alive=100)
+        self.life.init_universe_random()
         self.assertEqual(len(self.life.universe), UNIVERSE_NUM_ROWS)
 
     def test_init_universe_random_has_correct_num_of_cols(self):
-        self.life.init_universe_random(chance_alive=100)
+        self.life.init_universe_random()
 
         col_count = 0
         for col in self.life.universe[0]:
@@ -32,7 +32,7 @@ class TestLife(unittest.TestCase):
         self.assertEqual(col_count, UNIVERSE_NUM_COLS)
 
     def test_universe_random_only_inhabits_cells(self):
-        self.life.init_universe_random(chance_alive=100)
+        self.life.init_universe_random()
         for row in self.life.universe:
             for col in row:
                 self.assertIsInstance(col, Cell)
