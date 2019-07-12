@@ -35,7 +35,7 @@ class Life:
                 neighbours_count = self.neighbours_list[row][col]
                 self.universe[row][col].update(neighbours_count)
 
-    def init_universe_random(self, chance_alive):
+    def init_universe_random(self, chance_alive=10):
         """ Initializes a universe filled with random cells. """
 
         if not isinstance(chance_alive, int):
