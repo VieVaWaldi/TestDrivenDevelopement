@@ -11,7 +11,7 @@ The Makefile allows for the follwing commands.
 2. make init      - Installs all necessary dependencies
 3. make tests     - Runs the tests   
 4. make run       - Runs the game
-5. make run-god   - Runs the game
+5. make run-god   - Runs the game in god mode
 
 ### Keys for god-mode
 
