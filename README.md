@@ -16,9 +16,6 @@ The Makefile allows for the follwing commands.
 ### Keys for god-mode
 
 MouseButton Left to create
-
 MouseButton Right to destroy
-
 SPACE to destroy everything
-
 ENTER to start
