@@ -6,18 +6,12 @@ from app.src.game import Game
 
 if __name__ == '__main__':
 
-    parser = argparse.ArgumentParser(description='Choose a creation mode')
-    parser.add_argument('--random', metavar='-r', type=int, nargs='+',
-                        help='Create life randomly.')
+    god_mode = False
 
-    parser.add_argument('--god', metavar='-g', nargs='+',
-                        help='You are god.')
+    if len(sys.argv) > 1:
+        god_mode = sys.argv[1]
 
-    args = parser.parse_args()
-
-    print(args)
-
-    # game = Game()
-    # game.start_game()
+    game = Game(god_mode)
+    game.start_game()
 
     print('Job Done!')

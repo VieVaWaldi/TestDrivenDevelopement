@@ -11,13 +11,16 @@ from app.src.assets.configuration import *
 class Game:
     """ Game logic with main loop. Uses pygame. ... """
 
-    def __init__(self):
+    def __init__(self, god_mode=False):
         pygame.init()
         self.screen = pygame.display.set_mode(SCREEN_SIZE)
 
         self.life = Life(self.screen)
-        # self.life.init_universe_random(15)
-        self.life.init_universe_by_god()
+
+        if god_mode:
+            self.life.init_universe_by_god()
+        else:
+            self.life.init_universe_random(10)
 
         self.running = False
 
@@ -27,7 +30,7 @@ class Game:
 
         while self.running:
 
-            # self.__check_events()
+            self.__check_events()
 
             self.life.calculate_universe()
 
