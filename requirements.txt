@@ -1,4 +1,3 @@
 pygame
 nose
 rednose
-PyQt5
