@@ -1,7 +1,7 @@
 # TestDrivenDevelopement
 
-Game of Life is a fun little simulation and I used this as an excuse to have fun during a students project.
-The goal was to implement something in TDD. 
+Game of Life is a fun little simulation that I used as an excuse to have fun during a students project.
+The goal was to implement something in TDD. This paradigm actually offers some real benefits and had some impacts on how my code was structured compared to what is happening usually.
 
 ### Using the project
 
